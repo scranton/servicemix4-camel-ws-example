@@ -16,35 +16,26 @@
   -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/spring"
-       xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <camelContext id="com.fusesource.examples.ws-camel-client" xmlns="http://camel.apache.org/schema/spring">
-    
-    <route id="periodicGreeter">
-      <from uri="timer:foo?period=5000"/>
-      <!-- set the action to be triggered -->
-      <setHeader headerName="SOAPAction">
-        <constant>http://examples.fusesource.com/greeter/greetMe</constant>
-      </setHeader>
-      <transform>
-        <constant>My Favourite Web Service</constant>
-      </transform>
-      <log message="The message contains ${body}"/>
-      
-      <loadBalance>
-        <failover roundRobin="true" maximumFailoverAttempts="1"/>
-        <!-- exposed by ws-cxf-service -->
-        <to uri="cxf:http://localhost:9090/greeter?serviceClass=com.fusesource.examples.greeter.Greeter" />
-        <!-- exposed by ws-camel-service -->
-        <to uri="cxf:http://localhost:9090/greeterImpl?serviceClass=com.fusesource.examples.greeter.Greeter" />
-        <!-- exposed by ws-camel-proxy -->
-        <to uri="cxf:http://localhost:9091/greeterProxy?serviceClass=com.fusesource.examples.greeter.Greeter" />
-      </loadBalance>
-    </route>
+    <camelContext id="com.fusesource.examples.ws-camel-client" xmlns="http://camel.apache.org/schema/spring"
+                  trace="false">
 
-  </camelContext>
+        <route id="periodicGreeter">
+            <from uri="timer:greeterTimer?period=5000"/>
+            <setBody>
+                <constant>My Favourite Web Service</constant>
+            </setBody>
+
+            <loadBalance>
+                <failover roundRobin="true" maximumFailoverAttempts="1"/>
+                <to uri="cxf:http://localhost:9090/greeter?serviceClass=com.fusesource.examples.greeter.Greeter"/>
+                <to uri="cxf:http://localhost:9091/greeterProxy?serviceClass=com.fusesource.examples.greeter.Greeter"/>
+            </loadBalance>
+
+            <log message="The response contains '${body}'"/>
+        </route>
+
+    </camelContext>
 
 </beans>
