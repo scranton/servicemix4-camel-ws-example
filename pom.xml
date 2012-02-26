@@ -38,6 +38,8 @@
     <properties>
         <application-name>ServiceMix Web Service Examples</application-name>
 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <servicemix-version>4.4.1-fuse-02-05</servicemix-version>
         <camel-version>2.8.0-fuse-02-05</camel-version>
         <cxf-version>2.4.3-fuse-01-02</cxf-version>
@@ -139,6 +141,12 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.4.3</version>
+                </plugin>
+
+                <plugin>
                     <groupId>org.apache.camel</groupId>
                     <artifactId>camel-maven-plugin</artifactId>
                     <version>${camel-version}</version>
@@ -162,20 +170,6 @@
                     <groupId>org.apache.cxf</groupId>
                     <artifactId>cxf-codegen-plugin</artifactId>
                     <version>${cxf-version}</version>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>wsdl2java</goal>
-                            </goals>
-                            <configuration>
-                                <wsdlRoot>${project.basedir}/src/main/resources/wsdl</wsdlRoot>
-                                <includes>
-                                    <include>*.wsdl</include>
-                                </includes>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

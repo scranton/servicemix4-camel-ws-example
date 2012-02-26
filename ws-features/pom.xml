@@ -26,7 +26,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.fusesource.examples</groupId>
     <artifactId>ws-features</artifactId>
     <packaging>jar</packaging>
 

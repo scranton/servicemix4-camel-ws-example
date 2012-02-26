@@ -25,9 +25,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.fusesource.examples</groupId>
     <artifactId>ws-camel-service</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>${application-name} :: ${project.artifactId}</name>
