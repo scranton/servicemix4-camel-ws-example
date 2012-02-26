@@ -33,8 +33,7 @@
     <name>${application-name} :: ${project.artifactId}</name>
 
     <properties>
-        <osgi-import-package>META-INF.cxf,wsdl,com.fusesource.examples.greeter,com.fusesource.examples.greeter.model,*
-        </osgi-import-package>
+        <osgi-import-package>META-INF.cxf,wsdl,com.fusesource.examples.greeter,com.fusesource.examples.greeter.model,*</osgi-import-package>
         <osgi-dynamicimport-package>org.apache.cxf.*,org.springframework.beans.*</osgi-dynamicimport-package>
     </properties>
 
@@ -54,29 +53,27 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-soap</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
             <artifactId>camel-cxf</artifactId>
         </dependency>
+
+        <!-- needed to run standalone, i.e. mvn camel:run -->
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jetty</artifactId>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+
+        <!-- testing -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -95,6 +92,10 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 

@@ -43,7 +43,6 @@
         <cxf-version>2.4.3-fuse-01-02</cxf-version>
 
         <slf4j-version>1.6.1</slf4j-version>
-        <log4j-version>1.2.16</log4j-version>
         <junit-version>4.8.1</junit-version>
     </properties>
 
@@ -73,71 +72,14 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-
     <dependencyManagement>
         <dependencies>
-            <!-- test dependencies -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit-version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-cxf</artifactId>
-                <version>${camel-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-http</artifactId>
-                <version>${camel-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-soap</artifactId>
-                <version>${camel-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-jaxb</artifactId>
-                <version>${camel-version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-frontend-jaxws</artifactId>
-                <version>${cxf-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http</artifactId>
-                <version>${cxf-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-transports-http-jetty</artifactId>
-                <version>${cxf-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-bindings-soap</artifactId>
-                <version>${cxf-version}</version>
-            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>greeter-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-core</artifactId>
@@ -150,9 +92,16 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.camel</groupId>
-                <artifactId>camel-jetty</artifactId>
+                <artifactId>camel-cxf</artifactId>
                 <version>${camel-version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http-jetty</artifactId>
+                <version>${cxf-version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -163,10 +112,13 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j-version}</version>
             </dependency>
+
+            <!-- test dependencies -->
             <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j-version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -192,7 +144,7 @@
                     <version>${camel-version}</version>
                 </plugin>
 
-                <!-- to generate the MANIFEST-FILE of the bundle -->
+                <!-- to generate OSGi bundle -->
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
